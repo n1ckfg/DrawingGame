@@ -3,6 +3,7 @@ int squareDelta = 5;
 color currentColor = color(255, 0, 0);
 color bgColor = color(0);
 PGraphics pg;
+PVector p1, p2, p3;
 
 void setup() {
   fullScreen(P2D);
@@ -13,11 +14,12 @@ void setup() {
   pg.beginDraw();
   pg.background(bgColor);
   pg.noStroke();
+  pg.rectMode(CENTER);
   pg.fill(currentColor);
   pg.endDraw();
 }
 
-void draw() {
+void draw() { 
   if (keyPressed) {
     switch(key) {
       case '=':
@@ -35,8 +37,13 @@ void draw() {
   pg.beginDraw();
   pg.fill(currentColor);
   if (mousePressed) {
-    pg.rectMode(CENTER);
-    pg.rect(mouseX, mouseY, squareSize, squareSize);
+    p1 = new PVector(mouseX, mouseY);
+    p2 = new PVector(pmouseX, pmouseY);
+    float lerpSteps = p1.dist(p2);
+    for (int i=0; i<lerpSteps; i++) {
+      p3 = p1.lerp(p2, i/lerpSteps);
+      pg.rect(p3.x, p3.y, squareSize, squareSize);
+    }
   }
   pg.endDraw();
   
