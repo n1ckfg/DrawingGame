@@ -3,4 +3,5 @@
 *.jpg
 *.tga
 *.autosave
+application.macosx64/*
 
