@@ -1,12 +1,12 @@
 int brushSize = 10;
-int brushDelta = 5;
+int brushDelta = 10;
 color currentColor = color(127);
 color lastColor = currentColor;
 color bgColor = color(0);
 PGraphics pg, pgBackup;
 PVector p1, p2, p3;
 int alphaNum = 255;
-int alphaDelta = 5;
+int alphaDelta = 10;
 String saveFormat = "jpg";
 boolean armUndo = false;
 boolean isRect = true;
@@ -52,7 +52,7 @@ void draw() {
         break;
     }
     brushSize = constrain(brushSize, 2, 2000);
-    alphaNum = constrain(alphaNum, 2, 255);
+    alphaNum = constrain(alphaNum, 2, 127);
   }
   
   background(bgColor);
