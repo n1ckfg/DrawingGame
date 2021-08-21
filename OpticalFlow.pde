@@ -1,8 +1,8 @@
 import gab.opencv.*;
 
 OpenCV opencv;
-int levelOfDetails = 2;
-int videoScale = 8;
+int levelOfDetails = 1;
+int videoScale = 12;
 int videoWidth, videoHeight;
 PImage motionTexture;
 PShader shaderBuffer;
@@ -45,7 +45,6 @@ void opticalFlowDraw() {
   opencv.useColor(PApplet.RGB);
 
   motionTexture.loadPixels();
-
   for (int x = 0; x < motionTexture.width; x++) {
     for (int y = 0; y < motionTexture.height; y++) {
       // get the vector motion from openCV
@@ -55,10 +54,11 @@ void opticalFlowDraw() {
 
       // get index array from 2d position
       int index = x + y * motionTexture.width;
-
+  
       // encode vector into a color
       colorMode(RGB, 1, 1, 1);
       motionTexture.pixels[index] = color(direction.x * 0.5 + 0.5, direction.y * 0.5 + 0.5, min(1, motion.mag()));
+      colorMode(RGB, 255, 255, 255);
     }
   }
 
@@ -84,9 +84,10 @@ void opticalFlowDraw() {
 
   // draw final render
   tex.beginDraw();
+  tex.blendMode(SCREEN);
   tex.image(bufferWrite, 0, 0, tex.width, tex.height);
+  tex.blendMode(BLEND);
   tex.endDraw();  
-  
 }
 
 // the current frame buffer

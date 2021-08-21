@@ -44,12 +44,14 @@ void keyPressed() {
       lastColor = currentColor;
       currentColor = color(r, g, b);
       break;
-    case 'r':
-      lastColor = currentColor;
-      currentColor = color(127 + random(127), 127 + random(127), 127 + random(127));
-      break;
     case 'e':
       currentColor =  bgColor;
+      alphaNum = 255;
+      break;
+    case 'r':
+      lastColor = currentColor;
+      int val = 63;
+      currentColor = color(val + random(val), val + random(val), val + random(val));
       break;
     case 's':
       tex.save("output_" + millis() + "." + saveFormat);

@@ -5,7 +5,7 @@ color lastColor = currentColor;
 color bgColor = color(0);
 PGraphics pg, pgBackup;
 PVector p1, p2, p3;
-int alphaNum = 127;
+int alphaNum = 255;
 int alphaDelta = 5;
 String saveFormat = "jpg";
 boolean armUndo = false;
@@ -23,7 +23,8 @@ void setup() {
   pg = createGraphics(width, height, P2D);
   pgBackup = createGraphics(width, height, P2D);
   bloomSetup();
-  
+  opticalFlowSetup();
+
   pg.beginDraw();
   pg.background(bgColor);
   pg.noStroke();
@@ -91,6 +92,7 @@ void draw() {
   tex.background(0);
   tex.image(pg, 0, 0);
   tex.endDraw();
+  opticalFlowDraw();
   bloomDraw();
   
   stroke(255);
