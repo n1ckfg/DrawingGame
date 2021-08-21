@@ -10,6 +10,7 @@ int alphaDelta = 5;
 String saveFormat = "jpg";
 boolean armUndo = false;
 boolean isRect = true;
+boolean firstRun = true;
 
 void setup() {
   fullScreen(P2D);
@@ -63,6 +64,13 @@ void draw() {
   }
   
   pg.beginDraw();
+  if (firstRun) {
+    try {
+      PImage workingImg = loadImage("data/working.png");
+      pg.image(workingImg, 0, 0, pg.width, pg.height);
+    } catch (Exception e) { }
+    firstRun = false;
+  }
   pg.fill(currentColor, alphaNum);
   if (mousePressed) {
     p1 = new PVector(mouseX, mouseY);

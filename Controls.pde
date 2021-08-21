@@ -53,6 +53,7 @@ void keyPressed() {
       break;
     case 's':
       saveFrame("output_" + millis() + "." + saveFormat);
+      saveFrame("data/working.png");
       break;
     case 'z':
       armUndo = true;
