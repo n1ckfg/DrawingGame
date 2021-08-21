@@ -52,8 +52,8 @@ void keyPressed() {
       currentColor =  bgColor;
       break;
     case 's':
-      saveFrame("output_" + millis() + "." + saveFormat);
-      saveFrame("data/working.png");
+      tex.save("output_" + millis() + "." + saveFormat);
+      pg.save("data/working.png");
       break;
     case 'z':
       armUndo = true;

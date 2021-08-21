@@ -22,6 +22,7 @@ void setup() {
 
   pg = createGraphics(width, height, P2D);
   pgBackup = createGraphics(width, height, P2D);
+  bloomSetup();
   
   pg.beginDraw();
   pg.background(bgColor);
@@ -86,7 +87,11 @@ void draw() {
   }
   pg.endDraw();
   
-  image(pg, 0, 0);
+  tex.beginDraw();
+  tex.background(0);
+  tex.image(pg, 0, 0);
+  tex.endDraw();
+  bloomDraw();
   
   stroke(255);
 
