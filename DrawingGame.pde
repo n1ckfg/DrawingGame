@@ -1,16 +1,17 @@
 int brushSize = 10;
-int brushDelta = 10;
+int brushDelta = 5;
 color currentColor = color(127);
 color lastColor = currentColor;
 color bgColor = color(0);
 PGraphics pg, pgBackup;
 PVector p1, p2, p3;
 int alphaNum = 255;
-int alphaDelta = 10;
+int alphaDelta = 5;
 String saveFormat = "jpg";
 boolean armUndo = false;
 boolean isRect = true;
 boolean firstRun = true;
+boolean doOpticalFlow = false;
 
 void setup() {
   fullScreen(P2D);
@@ -52,7 +53,7 @@ void draw() {
         break;
     }
     brushSize = constrain(brushSize, 2, 2000);
-    alphaNum = constrain(alphaNum, 2, 127);
+    alphaNum = constrain(alphaNum, 2, 255);
   }
   
   background(bgColor);
@@ -92,7 +93,7 @@ void draw() {
   tex.background(0);
   tex.image(pg, 0, 0);
   tex.endDraw();
-  opticalFlowDraw();
+  if (doOpticalFlow) opticalFlowDraw();
   bloomDraw();
   
   stroke(255);

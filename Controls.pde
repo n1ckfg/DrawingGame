@@ -63,6 +63,9 @@ void keyPressed() {
     case 'b':
       isRect = !isRect;
       break;
+    case 'f':
+      doOpticalFlow = !doOpticalFlow;
+      break;
   }
 }
 
