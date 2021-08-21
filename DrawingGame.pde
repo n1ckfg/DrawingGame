@@ -121,7 +121,3 @@ void drawBrush(float x, float y, boolean ui) {
     }
   }
 }
-
-void exit() {
-  pg.save("data/working.png");
-}
