@@ -9,7 +9,8 @@ class Typer {
   
   String inputString = "";
   int markTime = 0;
-  int timeout = 1000;
+  int timeout = 1500;
+  boolean armReset = false;
   
   Typer() {
     //
@@ -20,8 +21,14 @@ class Typer {
   }
   
   void update() {
-    if (millis() > markTime + timeout) {
-      inputString = "";
+    int m = millis();
+    if (!armReset && m > markTime + timeout / 2 && m < markTime + timeout) {
+      currentCol = badCol; 
+      armReset = true;
+    } else if (m > markTime + timeout) {
+      currentCol = defaultCol;
+      armReset = false;
+      inputString = "";    
     }
   }
   
@@ -42,6 +49,10 @@ class Typer {
   }
   
   void addChar(char c) {
+    if (armReset) {
+      inputString = "";
+      armReset = false;
+    }
     inputString += c;
     parseCmd(inputString);
     lastTime();
@@ -58,6 +69,9 @@ class Typer {
   }
   
   void parseCmd(String input) {    
+    currentCol = goodCol;
+    armReset = true;
+    
     switch (input.toLowerCase()) {
       case "red":
         lastColor = currentColor;
@@ -82,6 +96,14 @@ class Typer {
       case "teal":
         lastColor = currentColor;
         currentColor = color(0, 255, 255);
+        break;
+      case "orange":
+        lastColor = currentColor;
+        currentColor = color(200, 100, 0);
+        break;
+      case "purple":
+        lastColor = currentColor;
+        currentColor = color(80, 0, 155);
         break;
       case "black":
         lastColor = currentColor;
@@ -126,8 +148,15 @@ class Typer {
       case "brush":
         isRect = !isRect;
         break;
-      case "flow":
+      case "glitch":
         doOpticalFlow = !doOpticalFlow;
+        break;
+      case "delete":
+        armDelete = true;
+        break;
+      default:
+        currentCol = defaultCol;
+        armReset = false;
         break;
     }
   }

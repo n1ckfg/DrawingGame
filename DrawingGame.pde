@@ -9,6 +9,7 @@ int alphaNum = 255;
 int alphaDelta = 5;
 String saveFormat = "jpg";
 boolean armUndo = false;
+boolean armDelete = false;
 boolean isRect = true;
 boolean firstRun = true;
 boolean doOpticalFlow = false;
@@ -85,6 +86,13 @@ void draw() {
     pg.image(pgBackup, 0, 0);
     pg.endDraw();
     armUndo = false;
+  }
+  
+  if (armDelete) {
+    pg.beginDraw();
+    pg.background(bgColor);
+    pg.endDraw();
+    armDelete = false;    
   }
   
   pg.beginDraw();
