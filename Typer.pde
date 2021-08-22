@@ -159,11 +159,17 @@ class Typer {
       case "undo":
         armUndo = true;
         break;
-      case "brush":
-        isRect = !isRect;
+      case "square":
+        isRect = true;
+        break;
+      case "circle":
+        isRect = false;
         break;
       case "glitch":
-        doOpticalFlow = !doOpticalFlow;
+        doOpticalFlow = true;
+        break;
+      case "unglitch":
+        doOpticalFlow = false;
         break;
       case "delete":
         armDelete = true;
