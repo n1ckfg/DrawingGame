@@ -8,6 +8,7 @@ class Typer {
   int outlineSize = 3;
   
   String inputString = "";
+  String lastString = "";
   int markTime = 0;
   int timeout = 1500;
   boolean armReset = false;
@@ -64,6 +65,11 @@ class Typer {
     }
   }
   
+  void repeatCmd() {
+    inputString = "" + lastString;
+    parseCmd(inputString);
+  }
+  
   void parseCmd() {
     parseCmd(inputString);
   }
@@ -100,6 +106,14 @@ class Typer {
       case "orange":
         lastColor = currentColor;
         currentColor = color(200, 100, 0);
+        break;
+      case "tan":
+        lastColor = currentColor;
+        currentColor = color(110, 100, 0);
+        break;
+      case "brown":
+        lastColor = currentColor;
+        currentColor = color(70, 50, 0);
         break;
       case "purple":
         lastColor = currentColor;
@@ -159,6 +173,8 @@ class Typer {
         armReset = false;
         break;
     }
+    
+    if (armReset) lastString = "" + inputString;
   }
   
 }

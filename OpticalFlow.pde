@@ -84,7 +84,7 @@ void opticalFlowDraw() {
 
   // draw final render
   tex.beginDraw();
-  tex.blendMode(SCREEN);
+  tex.blendMode(LIGHTEST);
   tex.image(bufferWrite, 0, 0, tex.width, tex.height);
   tex.blendMode(BLEND);
   tex.endDraw();  
