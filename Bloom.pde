@@ -8,7 +8,7 @@ DwFilter filter;
 PGraphics2D tex;
 
 void bloomSetup() {
-  tex = (PGraphics2D) createGraphics(width, height, P2D);
+  tex = (PGraphics2D) createGraphics(sW, sH, P2D);
   tex.noSmooth();
   
   context = new DwPixelFlow(this);
@@ -20,5 +20,5 @@ void bloomSetup() {
 
 void bloomDraw() {
   filter.bloom.apply(tex);
-  image(tex, 0, 0, width, height);
+  image(tex, 0, 0, sW, sH);
 }

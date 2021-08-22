@@ -24,7 +24,7 @@ void opticalFlowSetup() {
   currentRender = 0;
   
   for (int i = 0; i < renderArray.length; i++) {
-    renderArray[i] = createGraphics(width, height, P2D);
+    renderArray[i] = createGraphics(sW, sH, P2D);
 
     renderArray[i].beginDraw();
     renderArray[i].background(0);
@@ -78,7 +78,7 @@ void opticalFlowDraw() {
 
   // apply pixel displacement with shader
   bufferWrite.shader(shaderBuffer);
-  bufferWrite.rect(0, 0, width, height);
+  bufferWrite.rect(0, 0, sW, sH);
 
   bufferWrite.endDraw();
 

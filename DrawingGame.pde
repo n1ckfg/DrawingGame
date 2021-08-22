@@ -12,18 +12,22 @@ boolean armUndo = false;
 boolean isRect = true;
 boolean firstRun = true;
 boolean doOpticalFlow = false;
-int globalScale = 2;
+int globalScale = 1;
+int sW, sH;
 
 void setup() {
   fullScreen(P2D);
+  sW = displayWidth / globalScale;
+  sH = displayHeight / globalScale;
+  
   noCursor();
   noSmooth();
   pixelDensity(1);
   rectMode(CENTER);
   ellipseMode(CENTER);
 
-  pg = createGraphics(width, height, P2D);
-  pgBackup = createGraphics(width, height, P2D);
+  pg = createGraphics(sW, sH, P2D);
+  pgBackup = createGraphics(sW, sH, P2D);
   bloomSetup();
   opticalFlowSetup();
 
