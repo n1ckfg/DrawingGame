@@ -20,5 +20,5 @@ void bloomSetup() {
 
 void bloomDraw() {
   filter.bloom.apply(tex);
-  image(tex, 0, 0, sW, sH);
+  image(tex, 0, 0, width, height);
 }

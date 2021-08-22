@@ -12,7 +12,8 @@ boolean armUndo = false;
 boolean isRect = true;
 boolean firstRun = true;
 boolean doOpticalFlow = false;
-int globalScale = 1;
+
+int globalScale = 2;
 int sW, sH;
 
 void setup() {
@@ -116,15 +117,16 @@ void draw() {
     strokeWeight(2);
   }
   fill(currentColor, alphaNum);
-  drawBrush(mouseXscaled, mouseYscaled, true);
+  drawBrush(mouseX, mouseY, true);
 }
 
 void drawBrush(float x, float y, boolean ui) {
+  int brushSizeScaled = brushSize / globalScale;
   if (!ui) {
     if (isRect) {
-      pg.rect(x, y, brushSize, brushSize);
+      pg.rect(x, y, brushSizeScaled, brushSizeScaled);
     } else {
-      pg.circle(x, y, brushSize);
+      pg.circle(x, y, brushSizeScaled);
     }
   } else {
     if (isRect) {

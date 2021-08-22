@@ -1,8 +1,8 @@
 import gab.opencv.*;
 
 OpenCV opencv;
-int levelOfDetails = 1;
-int videoScale = 12;
+int levelOfDetails = 2;
+int videoScale = 8;
 int videoWidth, videoHeight;
 PImage motionTexture;
 PShader shaderBuffer;
