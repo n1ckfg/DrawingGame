@@ -12,11 +12,12 @@ boolean armUndo = false;
 boolean isRect = true;
 boolean firstRun = true;
 boolean doOpticalFlow = false;
+int globalScale = 2;
 
 void setup() {
   fullScreen(P2D);
   noCursor();
-  smooth();
+  noSmooth();
   pixelDensity(1);
   rectMode(CENTER);
   ellipseMode(CENTER);
@@ -29,14 +30,21 @@ void setup() {
   pg.beginDraw();
   pg.background(bgColor);
   pg.noStroke();
-  pg.smooth();
+  pg.noSmooth();
   pg.rectMode(CENTER);
   pg.ellipseMode(CENTER);
   pg.fill(currentColor);
   pg.endDraw();
+  
+  pgBackup.noSmooth();
 }
 
 void draw() { 
+  int mouseXscaled = mouseX / globalScale;
+  int mouseYscaled = mouseY / globalScale;
+  int pmouseXscaled = pmouseX / globalScale;
+  int pmouseYscaled = pmouseY / globalScale;
+  
   if (keyPressed) {
     switch(key) {
       case ']':
@@ -76,8 +84,8 @@ void draw() {
   }
   pg.fill(currentColor, alphaNum);
   if (mousePressed) {
-    p1 = new PVector(mouseX, mouseY);
-    p2 = new PVector(pmouseX, pmouseY);
+    p1 = new PVector(mouseXscaled, mouseYscaled);
+    p2 = new PVector(pmouseXscaled, pmouseYscaled);
 
     drawBrush(p1.x, p1.y, false);
     
@@ -104,7 +112,7 @@ void draw() {
     strokeWeight(2);
   }
   fill(currentColor, alphaNum);
-  drawBrush(mouseX, mouseY, true);
+  drawBrush(mouseXscaled, mouseYscaled, true);
 }
 
 void drawBrush(float x, float y, boolean ui) {

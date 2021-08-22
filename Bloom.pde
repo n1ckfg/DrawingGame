@@ -9,7 +9,7 @@ PGraphics2D tex;
 
 void bloomSetup() {
   tex = (PGraphics2D) createGraphics(width, height, P2D);
-  //tex.noSmooth();
+  tex.noSmooth();
   
   context = new DwPixelFlow(this);
   filter = new DwFilter(context);
