@@ -12,9 +12,12 @@ boolean armUndo = false;
 boolean isRect = true;
 boolean firstRun = true;
 boolean doOpticalFlow = false;
-
+PFont font;
+int fontSize = 48;
+  
 int globalScale = 2;
 int sW, sH;
+Typer typer;
 
 void setup() {
   fullScreen(P2D);
@@ -26,7 +29,12 @@ void setup() {
   pixelDensity(1);
   rectMode(CENTER);
   ellipseMode(CENTER);
-
+  
+  typer = new Typer();
+  font = createFont("Arial", fontSize*2);
+  textFont(font, fontSize);
+  textAlign(CENTER);
+  
   pg = createGraphics(sW, sH, P2D);
   pgBackup = createGraphics(sW, sH, P2D);
   bloomSetup();
@@ -44,7 +52,7 @@ void setup() {
   pgBackup.noSmooth();
 }
 
-void draw() { 
+void draw() {  
   int mouseXscaled = mouseX / globalScale;
   int mouseYscaled = mouseY / globalScale;
   int pmouseXscaled = pmouseX / globalScale;
@@ -118,6 +126,8 @@ void draw() {
   }
   fill(currentColor, alphaNum);
   drawBrush(mouseX, mouseY, true);
+
+  typer.run();
 }
 
 void drawBrush(float x, float y, boolean ui) {
