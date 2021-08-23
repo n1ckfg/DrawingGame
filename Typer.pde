@@ -80,77 +80,79 @@ class Typer {
     
     switch (input.toLowerCase()) {
       case "red":
-        lastColor = currentColor;
-        currentColor = color(255, 0, 0);
+        setColor(color(255, 0, 0));
         break;
       case "green":
-        lastColor = currentColor;
-        currentColor = color(0, 255, 0);
+        setColor(color(0, 255, 0));
         break;
       case "blue":
-        lastColor = currentColor;
-        currentColor = color(0, 0, 255);
+        setColor(color(0, 0, 255));
         break;
       case "yellow":
-        lastColor = currentColor;
-        currentColor = color(255, 255, 0);
+        setColor(color(255, 255, 0));
         break;
       case "pink":
-        lastColor = currentColor;
-        currentColor = color(255, 0, 255);
+        setColor(color(255, 0, 255));
         break;
       case "teal":
-        lastColor = currentColor;
-        currentColor = color(0, 255, 255);
+        setColor(color(0, 255, 255));
         break;
       case "orange":
-        lastColor = currentColor;
-        currentColor = color(200, 100, 0);
+        setColor(color(200, 100, 0));
         break;
       case "tan":
-        lastColor = currentColor;
-        currentColor = color(110, 100, 0);
+        setColor(color(110, 100, 0));
         break;
       case "brown":
-        lastColor = currentColor;
-        currentColor = color(70, 50, 0);
+        setColor(color(70, 50, 0));
         break;
       case "purple":
-        lastColor = currentColor;
-        currentColor = color(80, 0, 155);
+        setColor(color(80, 0, 155));
         break;
       case "black":
-        lastColor = currentColor;
-        currentColor = color(0);
+        setColor(color(0));
         break;
       case "grey":
-        lastColor = currentColor;
-        currentColor = color(127);
+        setColor(color(127));
         break;
       case "gray":
-        lastColor = currentColor;
-        currentColor = color(127);
+        setColor(color(127));
         break;
       case "white":
-        lastColor = currentColor;
-        currentColor = color(255);
+        setColor(color(255));
         break;
+      // ~ ~ ~ ~ ~ ~
+      // https://www.colorhexa.com/color-names
+      case "chartreuse":
+        setColor(color(#B9FA26));
+        break;
+      case "magenta":
+        setColor(color(#C1199D));
+        break;
+      case "turquoise":
+        setColor(color(#0BD2E3));
+        break;
+      case "vermillion":
+        setColor(color(#FC5112));
+        break;
+      case "viridian":
+        setColor(color(#40826d));
+        break;
+      // ~ ~ ~ ~ ~ ~
       case "mix":
         float div = 1.8;
         float r = constrain((red(lastColor) + red(currentColor)) / div, 0, 255);
         float g = constrain((green(lastColor) + green(currentColor)) / div, 0, 255);
         float b = constrain((blue(lastColor) + blue(currentColor)) / div, 0, 255);
-        lastColor = currentColor;
-        currentColor = color(r, g, b);
+        setColor(color(r, g, b));
         break;
       case "erase":
         currentColor =  bgColor;
         alphaNum = 255;
         break;
       case "random":
-        lastColor = currentColor;
         int val = 63;
-        currentColor = color(val + random(val), val + random(val), val + random(val));
+        setColor(color(val + random(val), val + random(val), val + random(val)));
         break;
       case "save":
         tex.save("output_" + millis() + "." + saveFormat);
@@ -181,6 +183,11 @@ class Typer {
     }
     
     if (armReset) lastString = "" + inputString;
+  }
+  
+  void setColor(color c) {
+    lastColor = currentColor;
+    currentColor = c;
   }
   
 }

@@ -119,7 +119,7 @@ void draw() {
   pg.endDraw();
   
   tex.beginDraw();
-  tex.background(0);
+  tex.background(bgColor);
   tex.image(pg, 0, 0);
   tex.endDraw();
   if (doOpticalFlow) opticalFlowDraw();
