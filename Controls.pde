@@ -3,7 +3,7 @@ void keyPressed() {
   
   if (keyCode == BACKSPACE || keyCode == DELETE) {
     typer.removeChar();
-  } else if (keyCode == ENTER || keyCode == RETURN || key == '[' || key == ']' || key == '-' || key == '+') {
+  } else if (keyCode == ENTER || keyCode == RETURN || key == '[' || key == ']' || key == '-' || key == '=') {
     //
   //} else if (keyCode == UP) {
     //typer.repeatCmd();
