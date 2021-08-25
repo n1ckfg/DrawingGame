@@ -17,6 +17,7 @@ PFont font;
 int fontSize = 48;
   
 int globalScale = 2;
+int mouseXscaled, mouseYscaled, pmouseXscaled, pmouseYscaled;
 int sW, sH;
 Typer typer;
 
@@ -47,6 +48,7 @@ void setup() {
   pg.noSmooth();
   pg.rectMode(CENTER);
   pg.ellipseMode(CENTER);
+  pg.imageMode(CENTER);
   pg.fill(currentColor);
   pg.endDraw();
   
@@ -54,10 +56,10 @@ void setup() {
 }
 
 void draw() {  
-  int mouseXscaled = mouseX / globalScale;
-  int mouseYscaled = mouseY / globalScale;
-  int pmouseXscaled = pmouseX / globalScale;
-  int pmouseYscaled = pmouseY / globalScale;
+  mouseXscaled = mouseX / globalScale;
+  mouseYscaled = mouseY / globalScale;
+  pmouseXscaled = pmouseX / globalScale;
+  pmouseYscaled = pmouseY / globalScale;
   
   if (keyPressed) {
     switch(key) {
@@ -115,6 +117,19 @@ void draw() {
       p3 = p1.lerp(p2, i/lerpSteps);
       drawBrush(p3.x, p3.y, false);
     }
+  }
+  
+  if (armCreateGif && millis() > gifMarkTime + gifTimeInterval) {
+    createGif();
+    armCreateGif = false;
+  }
+  if (gifMode) {
+    pg.pushMatrix();
+    pg.tint(255, alphaNum);
+    pg.translate(mouseXscaled, mouseYscaled);
+    pg.scale(((float) gif.width / 10000.0) * brushSize, ((float) gif.height / 10000.0) * brushSize);
+    pg.image(gif, 0, 0);
+    pg.popMatrix();
   }
   pg.endDraw();
   

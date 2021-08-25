@@ -18,3 +18,8 @@ void mousePressed() {
   pgBackup.image(pg, 0, 0);
   pgBackup.endDraw();
 }
+
+void mouseReleased() {
+  gifMode = false;
+  noTint();
+}

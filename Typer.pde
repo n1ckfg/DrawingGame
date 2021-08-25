@@ -79,6 +79,39 @@ class Typer {
     armReset = true;
     
     switch (input.toLowerCase()) {
+      // ~ ~ ~ ~ ~ ~   1. FUNCTIONS   ~ ~ ~ ~ ~ ~
+      case "mix":
+        float div = 1.8;
+        float r = constrain((red(lastColor) + red(currentColor)) / div, 0, 255);
+        float g = constrain((green(lastColor) + green(currentColor)) / div, 0, 255);
+        float b = constrain((blue(lastColor) + blue(currentColor)) / div, 0, 255);
+        setColor(color(r, g, b));
+        break;
+      case "erase":
+        currentColor =  bgColor;
+        alphaNum = 255;
+        break;
+      case "random":
+        int val = 63;
+        setColor(color(val + random(val), val + random(val), val + random(val)));
+        break;
+      case "save":
+        tex.save("output_" + millis() + "." + saveFormat);
+        pg.save("data/working.png");
+        break;
+      case "undo":
+        armUndo = true;
+        break;
+      case "square":
+        isRect = true;
+        break;
+      case "circle":
+        isRect = false;
+        break;
+      case "delete":
+        armDelete = true;
+        break;
+      // ~ ~ ~ ~ ~ ~   2. BASIC COLORS   ~ ~ ~ ~ ~ ~
       case "red":
         setColor(color(255, 0, 0));
         break;
@@ -121,7 +154,7 @@ class Typer {
       case "white":
         setColor(color(255));
         break;
-      // ~ ~ ~ ~ ~ ~
+      // ~ ~ ~ ~ ~ ~   3. EXPANDED COLORS   ~ ~ ~ ~ ~ ~
       // https://www.colorhexa.com/color-names
       case "chartreuse":
         setColor(color(#B9FA26));
@@ -138,44 +171,18 @@ class Typer {
       case "viridian":
         setColor(color(#40826d));
         break;
-      // ~ ~ ~ ~ ~ ~
-      case "mix":
-        float div = 1.8;
-        float r = constrain((red(lastColor) + red(currentColor)) / div, 0, 255);
-        float g = constrain((green(lastColor) + green(currentColor)) / div, 0, 255);
-        float b = constrain((blue(lastColor) + blue(currentColor)) / div, 0, 255);
-        setColor(color(r, g, b));
-        break;
-      case "erase":
-        currentColor =  bgColor;
-        alphaNum = 255;
-        break;
-      case "random":
-        int val = 63;
-        setColor(color(val + random(val), val + random(val), val + random(val)));
-        break;
-      case "save":
-        tex.save("output_" + millis() + "." + saveFormat);
-        pg.save("data/working.png");
-        break;
-      case "undo":
-        armUndo = true;
-        break;
-      case "square":
-        isRect = true;
-        break;
-      case "circle":
-        isRect = false;
-        break;
+      // ~ ~ ~ ~ ~ ~   4. SPECIAL EFFECTS   ~ ~ ~ ~ ~ ~
       case "glitch":
         doOpticalFlow = true;
         break;
       case "clean":
         doOpticalFlow = false;
         break;
-      case "delete":
-        armDelete = true;
+      // ~ ~ ~ ~ ~ ~   5. GIFS   ~ ~ ~ ~ ~ ~
+      case "bat":
+        armGif("bat");
         break;
+      // ~ ~ ~ ~ ~ ~   6. NO RESULT   ~ ~ ~ ~ ~ ~
       default:
         currentCol = defaultCol;
         armReset = false;
