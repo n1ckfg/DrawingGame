@@ -182,6 +182,15 @@ class Typer {
       case "bat":
         armGif("bat");
         break;
+      case "cat":
+        armGif("cat");
+        break;
+      case "rat":
+        armGif("rat");
+        break;
+      case "hat":
+        armGif("hat");
+        break;        
       // ~ ~ ~ ~ ~ ~   6. NO RESULT   ~ ~ ~ ~ ~ ~
       default:
         currentCol = defaultCol;

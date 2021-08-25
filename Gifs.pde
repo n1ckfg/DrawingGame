@@ -6,6 +6,7 @@ String gifQuery;
 Gif gif;
 int gifMarkTime = 0;
 int gifTimeInterval = 500;
+int maxResults = 5;
 
 void armGif(String query) {
   gifQuery = query;
@@ -14,7 +15,7 @@ void armGif(String query) {
 }
 
 void createGif() {
-  gif = getSingleGif(gifQuery, 1);
+  gif = getSingleGif(gifQuery, maxResults);
   gif.loop();
   gif.play();
   gifMode = true;
