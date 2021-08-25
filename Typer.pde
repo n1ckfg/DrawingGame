@@ -179,6 +179,7 @@ class Typer {
         doOpticalFlow = false;
         break;
       // ~ ~ ~ ~ ~ ~   5. GIFS   ~ ~ ~ ~ ~ ~
+      /*
       case "bat":
         armGif("bat");
         break;
@@ -193,7 +194,8 @@ class Typer {
         break;
       case "zelda":
         armGif("zelda");
-        break;           
+        break;
+      */
       // ~ ~ ~ ~ ~ ~   6. NO RESULT   ~ ~ ~ ~ ~ ~
       default:
         currentCol = defaultCol;
