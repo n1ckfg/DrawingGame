@@ -170,7 +170,7 @@ class Typer {
       case "glitch":
         doOpticalFlow = true;
         break;
-      case "unglitch":
+      case "clean":
         doOpticalFlow = false;
         break;
       case "delete":
