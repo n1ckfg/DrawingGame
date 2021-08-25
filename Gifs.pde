@@ -6,7 +6,7 @@ String gifQuery;
 Gif gif;
 int gifMarkTime = 0;
 int gifTimeInterval = 500;
-int maxResults = 5;
+int maxResults = 15;
 
 void armGif(String query) {
   gifQuery = query;
@@ -15,10 +15,14 @@ void armGif(String query) {
 }
 
 void createGif() {
-  gif = getSingleGif(gifQuery, maxResults);
-  gif.loop();
-  gif.play();
-  gifMode = true;
+  try {
+    gif = getSingleGif(gifQuery, maxResults);
+    gif.loop();
+    gif.play();
+    gifMode = true;
+  } catch (Exception e) {
+    gifMode = false;
+  }
 }
 
 ArrayList<String> getGifUrls(String query, int maxResults) {
@@ -50,15 +54,24 @@ ArrayList<Gif> getGifArray(String query, int maxResults) {
   
   for (int i=0; i<urls.size(); i++) {
     try {
-    returns.add(new Gif(this, urls.get(i)));
+      returns.add(new Gif(this, urls.get(i)));
     } catch (Exception e) { }
     if (returns.size() >= maxResults) break;
   }
   
+  if (returns.size() < 1) gifMode = false;
   return returns;
 }
 
 Gif getSingleGif(String query, int maxResults) {
   ArrayList<String> urls = getGifUrls(query, maxResults);
-  return new Gif(this, urls.get((int) random(urls.size())));
+  Gif returns;
+  try {
+    returns = new Gif(this, urls.get((int) random(urls.size())));
+    return returns;
+  } catch (Exception e) {
+    returns = null;
+    gifMode = false;
+  }
+  return returns;
 }

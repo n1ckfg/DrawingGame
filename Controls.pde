@@ -22,4 +22,5 @@ void mousePressed() {
 void mouseReleased() {
   gifMode = false;
   noTint();
+  gif = null;
 }

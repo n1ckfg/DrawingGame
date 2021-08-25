@@ -1,5 +1,6 @@
 int brushSize = 10;
 int brushDelta = 5;
+int brushSizeScaled = brushSize;
 color currentColor = color(127);
 color lastColor = currentColor;
 color bgColor = color(0);
@@ -16,7 +17,7 @@ boolean doOpticalFlow = false;
 PFont font;
 int fontSize = 48;
   
-int globalScale = 2;
+int globalScale = 3;
 int mouseXscaled, mouseYscaled, pmouseXscaled, pmouseYscaled;
 int sW, sH;
 Typer typer;
@@ -60,6 +61,7 @@ void draw() {
   mouseYscaled = mouseY / globalScale;
   pmouseXscaled = pmouseX / globalScale;
   pmouseYscaled = pmouseY / globalScale;
+  brushSizeScaled = brushSize / globalScale;
   
   if (keyPressed) {
     switch(key) {
@@ -101,7 +103,7 @@ void draw() {
   if (firstRun) {
     try {
       PImage workingImg = loadImage("data/working.png");
-      pg.image(workingImg, 0, 0, pg.width, pg.height);
+      pg.image(workingImg, pg.width/2, pg.height/2, pg.width, pg.height);
     } catch (Exception e) { }
     firstRun = false;
   }
@@ -127,7 +129,7 @@ void draw() {
     pg.pushMatrix();
     pg.tint(255, alphaNum);
     pg.translate(mouseXscaled, mouseYscaled);
-    pg.scale(((float) gif.width / 10000.0) * brushSize, ((float) gif.height / 10000.0) * brushSize);
+    pg.scale(((float) gif.width / 10000.0) * brushSizeScaled, ((float) gif.height / 10000.0) * brushSizeScaled);
     pg.image(gif, 0, 0);
     pg.popMatrix();
   }
@@ -154,14 +156,13 @@ void draw() {
 }
 
 void drawBrush(float x, float y, boolean ui) {
-  int brushSizeScaled = brushSize / globalScale;
-  if (!ui) {
+  if (!ui && !gifMode) {
     if (isRect) {
       pg.rect(x, y, brushSizeScaled, brushSizeScaled);
     } else {
       pg.circle(x, y, brushSizeScaled);
     }
-  } else {
+  } else if (ui && !gifMode) {
     if (isRect) {
       rect(x, y, brushSize, brushSize);
     } else {
