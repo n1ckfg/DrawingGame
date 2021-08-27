@@ -1,5 +1,5 @@
 int brushSize = 10;
-int brushDelta = 5;
+int brushDelta = 4;
 int brushSizeScaled = brushSize;
 color currentColor = color(127);
 color lastColor = currentColor;
@@ -7,7 +7,7 @@ color bgColor = color(0);
 PGraphics pg, pgBackup;
 PVector p1, p2, p3;
 int alphaNum = 255;
-int alphaDelta = 5;
+int alphaDelta = 6;
 String saveFormat = "jpg";
 boolean armUndo = false;
 boolean armDelete = false;
@@ -87,7 +87,7 @@ void draw() {
   if (armUndo) {
     pg.beginDraw();
     pg.background(bgColor);
-    pg.image(pgBackup, 0, 0);
+    pg.image(pgBackup, pg.width/2, pg.height/2);
     pg.endDraw();
     armUndo = false;
   }
