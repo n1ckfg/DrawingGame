@@ -88,6 +88,7 @@ class Typer {
         setColor(color(r, g, b));
         break;
       case "erase":
+        resetBrush();
         currentColor =  bgColor;
         alphaNum = 255;
         break;
@@ -193,6 +194,9 @@ class Typer {
         break;
       case "zelda":
         armGif("zelda");
+        break;
+      case "treasure":
+        armGif("treasure");
         break;
       // ~ ~ ~ ~ ~ ~   6. NO RESULT   ~ ~ ~ ~ ~ ~
       default:

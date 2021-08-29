@@ -1,6 +1,7 @@
 int brushSize = 10;
 int brushDelta = 4;
 int brushSizeScaled = brushSize;
+int minBrushResetSize = 50;
 color currentColor = color(127);
 color lastColor = currentColor;
 color bgColor = color(0);
@@ -64,6 +65,8 @@ void draw() {
   brushSizeScaled = brushSize / globalScale;
   
   if (keyPressed) {
+    typer.lastTime();
+  
     switch(key) {
       case ']':
         brushSize += brushDelta;
@@ -123,13 +126,25 @@ void draw() {
   
   if (armCreateGif && millis() > gifMarkTime + gifTimeInterval) {
     createGif();
+    resetBrush();
     armCreateGif = false;
   }
   if (gifMode) {
     pg.pushMatrix();
     pg.tint(255, alphaNum);
     pg.translate(mouseXscaled, mouseYscaled);
-    pg.scale(((float) gif.width / 10000.0) * brushSizeScaled, ((float) gif.height / 10000.0) * brushSizeScaled);
+    float sx, sy;
+    if (gif.width > gif.height) {
+      sx = brushSizeScaled;
+      sy = brushSizeScaled * ((float) gif.height / (float) gif.width);      
+    } else if (gif.width < gif.height) {
+      sx = brushSizeScaled * ((float) gif.width / (float) gif.height); 
+      sy = brushSizeScaled;    
+    } else {
+      sx = brushSizeScaled;
+      sy = brushSizeScaled;
+    }
+    pg.scale(sx / gif.width, sy / gif.height);
     pg.image(gif, 0, 0);
     pg.popMatrix();
   }
@@ -169,4 +184,8 @@ void drawBrush(float x, float y, boolean ui) {
       circle(x, y, brushSize);
     }
   }
+}
+
+void resetBrush() {
+  if (brushSize < minBrushResetSize) brushSize = minBrushResetSize;
 }
