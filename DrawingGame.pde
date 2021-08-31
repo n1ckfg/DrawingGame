@@ -12,6 +12,10 @@ int alphaDelta = 6;
 String saveFormat = "jpg";
 boolean armUndo = false;
 boolean armDelete = false;
+boolean armBake = false;
+boolean armInvert = false;
+boolean armBlur = false;
+boolean armLoad = false;
 boolean isRect = true;
 boolean firstRun = true;
 boolean doOpticalFlow = false;
@@ -103,12 +107,10 @@ void draw() {
   }
   
   pg.beginDraw();
-  if (firstRun) {
-    try {
-      PImage workingImg = loadImage("data/working.png");
-      pg.image(workingImg, pg.width/2, pg.height/2, pg.width, pg.height);
-    } catch (Exception e) { }
+  if (firstRun || armLoad) {
+    loadWorkingImage();
     firstRun = false;
+    armLoad = false;
   }
   pg.fill(currentColor, alphaNum);
   if (mousePressed) {
@@ -157,6 +159,27 @@ void draw() {
   if (doOpticalFlow) opticalFlowDraw();
   bloomDraw();
   
+  if (armBake) {
+    pg.beginDraw();
+    pg.image(get(), 0, 0, pg.width, pg.height);
+    pg.endDraw();
+    armBake = false;
+  }
+
+  if (armInvert) {
+    pg.beginDraw();
+    pg.filter(INVERT);
+    pg.endDraw();
+    armInvert = false;
+  }
+  
+  if (armBlur) {
+    pg.beginDraw();
+    pg.filter(BLUR);
+    pg.endDraw();
+    armBlur = false;
+  }
+  
   stroke(255);
 
   if (mousePressed) {
@@ -188,4 +211,11 @@ void drawBrush(float x, float y, boolean ui) {
 
 void resetBrush() {
   if (brushSize < minBrushResetSize) brushSize = minBrushResetSize;
+}
+
+void loadWorkingImage() {
+    try {
+      PImage workingImg = loadImage("data/working.png");
+      pg.image(workingImg, pg.width/2, pg.height/2, pg.width, pg.height);
+    } catch (Exception e) { }
 }

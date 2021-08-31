@@ -100,9 +100,6 @@ class Typer {
         tex.save("output_" + millis() + "." + saveFormat);
         pg.save("data/working.png");
         break;
-      case "undo":
-        armUndo = true;
-        break;
       case "square":
         isRect = true;
         break;
@@ -111,6 +108,21 @@ class Typer {
         break;
       case "delete":
         armDelete = true;
+        break;
+      case "bake":
+        armBake = true;
+        break;
+      case "invert":
+        armInvert = true;
+        break;
+      case "blur":
+        armBlur = true;
+        break;
+      case "load":
+        armLoad = true;
+        break;
+      case "undo":
+        armUndo = true;
         break;
       // ~ ~ ~ ~ ~ ~   2. BASIC COLORS   ~ ~ ~ ~ ~ ~
       case "red":
