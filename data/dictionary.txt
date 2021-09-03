@@ -1,0 +1,15 @@
+car
+truck
+flower
+treasure
+gold
+jewels
+cat
+dog
+bird
+flower
+lion
+tiger
+bear
+hippopotamus
+

@@ -3,8 +3,8 @@ void keyPressed() {
     typer.removeChar();
   } else if (keyCode == ENTER || keyCode == RETURN || key == '[' || key == ']' || key == '-' || key == '=') {
     //
-  //} else if (keyCode == UP) {
-    //typer.repeatCmd();
+  } else if (keyCode == UP) {
+    typer.repeatCmd();
   } else {
     typer.addChar(key);
   }  

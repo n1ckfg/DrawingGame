@@ -12,9 +12,10 @@ class Typer {
   int markTime = 0;
   int timeout = 1500;
   boolean armReset = false;
+  GifDictionary gifDictionary;
   
   Typer() {
-    //
+    gifDictionary = new GifDictionary("dictionary.txt");
   }
   
   void lastTime() {
@@ -77,8 +78,9 @@ class Typer {
   void parseCmd(String input) {    
     currentCol = goodCol;
     armReset = true;
+    input = input.toLowerCase();
     
-    switch (input.toLowerCase()) {
+    switch (input) {
       // ~ ~ ~ ~ ~ ~   1. FUNCTIONS   ~ ~ ~ ~ ~ ~
       case "mix":
         float div = 1.8;
@@ -124,96 +126,110 @@ class Typer {
       case "undo":
         armUndo = true;
         break;
-      // ~ ~ ~ ~ ~ ~   2. BASIC COLORS   ~ ~ ~ ~ ~ ~
+      // ~ ~ ~ ~ ~ ~   2. COLORS   ~ ~ ~ ~ ~ ~
+      // https://www.colorhexa.com/color-names
       case "red":
-        setColor(color(255, 0, 0));
+        setColor(color(#ff0000));
         break;
       case "green":
-        setColor(color(0, 255, 0));
+        setColor(color(#00ff00));
         break;
       case "blue":
-        setColor(color(0, 0, 255));
+        setColor(color(#0000ff));
         break;
       case "yellow":
-        setColor(color(255, 255, 0));
+        setColor(color(#ffff00));
         break;
       case "pink":
-        setColor(color(255, 0, 255));
+        setColor(color(#ffc0cb));
         break;
       case "teal":
-        setColor(color(0, 255, 255));
+        setColor(color(#008080));
         break;
       case "orange":
-        setColor(color(200, 100, 0));
+        setColor(color(#ffa500));
         break;
       case "tan":
-        setColor(color(110, 100, 0));
+        setColor(color(#d2b48c));
         break;
       case "brown":
-        setColor(color(70, 50, 0));
+        setColor(color(#654321));
         break;
       case "purple":
-        setColor(color(80, 0, 155));
+        setColor(color(#800080));
         break;
       case "black":
-        setColor(color(0));
+        setColor(color(#000000));
         break;
       case "grey":
-        setColor(color(127));
+        setColor(color(#808080));
         break;
       case "gray":
-        setColor(color(127));
+        setColor(color(#808080));
         break;
       case "white":
-        setColor(color(255));
+        setColor(color(#ffffff));
         break;
-      // ~ ~ ~ ~ ~ ~   3. EXPANDED COLORS   ~ ~ ~ ~ ~ ~
-      // https://www.colorhexa.com/color-names
       case "chartreuse":
-        setColor(color(#B9FA26));
+        setColor(color(#7fff00));
         break;
       case "magenta":
-        setColor(color(#C1199D));
+        setColor(color(#ff00ff));
+        break;
+      case "cyan":
+        setColor(color(#00ffff));
         break;
       case "turquoise":
-        setColor(color(#0BD2E3));
+        setColor(color(#30d5c8));
+        break;
+      case "vermilion":
+        setColor(color(#e34234));
         break;
       case "vermillion":
-        setColor(color(#FC5112));
+        setColor(color(#e34234));
         break;
       case "viridian":
         setColor(color(#40826d));
         break;
-      // ~ ~ ~ ~ ~ ~   4. SPECIAL EFFECTS   ~ ~ ~ ~ ~ ~
+      case "gold":
+        setColor(#ffd700);
+        break;
+      case "silver":
+        setColor(#c0c0c0);
+        break;
+      case "bronze":
+        setColor(#cd7f32);
+        break;
+      case "peach":
+        setColor(#ffe5b4);
+        break;
+      case "jade":
+        setColor(#00a86b);
+        break;
+      case "coffee":
+        setColor(#6f4e37);
+        break;
+      case "indigo":
+        setColor(#4b0082);
+        break;
+      case "violet":
+        setColor(#ee82ee);
+        break;
+      // ~ ~ ~ ~ ~ ~   3. SPECIAL EFFECTS   ~ ~ ~ ~ ~ ~
       case "glitch":
         doOpticalFlow = true;
         break;
       case "clean":
         doOpticalFlow = false;
         break;
-      // ~ ~ ~ ~ ~ ~   5. GIFS   ~ ~ ~ ~ ~ ~
-      case "bat":
-        armGif("bat");
-        break;
-      case "cat":
-        armGif("cat");
-        break;     
-      case "fish":
-        armGif("fish");
-        break;    
-      case "mario":
-        armGif("mario");
-        break;
-      case "zelda":
-        armGif("zelda");
-        break;
-      case "treasure":
-        armGif("treasure");
-        break;
-      // ~ ~ ~ ~ ~ ~   6. NO RESULT   ~ ~ ~ ~ ~ ~
+      // ~ ~ ~ ~ ~ ~   4. GIFS   ~ ~ ~ ~ ~ ~
       default:
-        currentCol = defaultCol;
-        armReset = false;
+        if (gifDictionary.doSearch(input)) {
+          armGif(input);
+        } else {
+          currentCol = defaultCol;
+          armReset = false;
+        }
         break;
     }
     

@@ -75,3 +75,21 @@ Gif getSingleGif(String query, int maxResults) {
   }
   return returns;
 }
+
+class GifDictionary {
+  
+  String[] words;
+  
+  GifDictionary(String url) {
+    words = loadStrings(url);
+  }
+  
+  boolean doSearch(String input) {
+    input = input.toLowerCase();
+    for (String word : words) {
+      if (input.equals(word.toLowerCase())) return true;
+    }
+    return false;
+  }
+  
+}
