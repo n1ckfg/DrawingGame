@@ -15,6 +15,7 @@ boolean armDelete = false;
 boolean armBake = false;
 boolean armInvert = false;
 boolean armBlur = false;
+boolean armSharpen = false;
 boolean armLoad = false;
 boolean isRect = true;
 boolean firstRun = true;
@@ -28,7 +29,7 @@ int sW, sH;
 Typer typer;
 
 void setup() {
-  fullScreen(P2D);
+  fullScreen(P2D, 2);
   sW = displayWidth / globalScale;
   sH = displayHeight / globalScale;
   
@@ -47,6 +48,7 @@ void setup() {
   pgBackup = createGraphics(sW, sH, P2D);
   bloomSetup();
   opticalFlowSetup();
+  sharpenSetup();
 
   pg.beginDraw();
   pg.background(bgColor);
@@ -85,7 +87,7 @@ void draw() {
         alphaNum -= alphaDelta;
         break;
     }
-    brushSize = constrain(brushSize, 2, 2000);
+    brushSize = constrain(brushSize, 4, 2000);
     alphaNum = constrain(alphaNum, 2, 255);
   }
   
@@ -164,6 +166,7 @@ void draw() {
     pg.image(get(), 0, 0, pg.width, pg.height);
     pg.endDraw();
     armBake = false;
+    doOpticalFlow = false;
   }
 
   if (armInvert) {
@@ -178,6 +181,13 @@ void draw() {
     pg.filter(BLUR);
     pg.endDraw();
     armBlur = false;
+  }
+  
+  if (armSharpen) {
+    pg.beginDraw();
+    pg.filter(shaderSharpen);
+    pg.endDraw();
+    armSharpen = false;
   }
   
   stroke(255);

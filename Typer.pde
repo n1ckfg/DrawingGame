@@ -120,6 +120,9 @@ class Typer {
       case "blur":
         armBlur = true;
         break;
+      case "sharpen":
+        armSharpen = true;
+        break;
       case "load":
         armLoad = true;
         break;

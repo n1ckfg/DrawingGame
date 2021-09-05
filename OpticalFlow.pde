@@ -19,7 +19,7 @@ void opticalFlowSetup() {
 
   opencv = new OpenCV(this, videoWidth, videoHeight);
   motionTexture = createImage(videoWidth / levelOfDetails, videoHeight / levelOfDetails, RGB);
-  shaderBuffer = loadShader("shaders/Buffer.frag", "shaders/Simple.vert");
+  shaderBuffer = loadShader("shaders/opticalflow.glsl");
   renderArray = new PGraphics[2];
   currentRender = 0;
   

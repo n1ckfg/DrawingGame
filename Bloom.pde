@@ -19,6 +19,6 @@ void bloomSetup() {
 }
 
 void bloomDraw() {
-  filter.bloom.apply(tex);
+  if (!armBake) filter.bloom.apply(tex);
   image(tex, 0, 0, width, height);
 }
