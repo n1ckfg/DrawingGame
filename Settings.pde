@@ -6,7 +6,11 @@ class Settings {
     try {
       data = loadStrings(_s);
       for (int i=0;i<data.length;i++) {
-        //if (data[i].equals("Export File Type")) exportFileType = setString(data[i+1]); 
+        if (data[i].equals("Global Scale")) globalScale = setInt(data[i+1]); 
+        if (data[i].equals("GIF Search Enabled")) gifSearchEnabled = setBoolean(data[i+1]); 
+        if (data[i].equals("Max GIF Results")) maxGifResults = setInt(data[i+1]); 
+        if (data[i].equals("API Url")) apiUrl = setString(data[i+1]); 
+        if (data[i].equals("API Key")) apiKey = setString(data[i+1]); 
       }
     } 
     catch(Exception e) {

@@ -6,8 +6,11 @@ String gifQuery;
 Gif gif;
 int gifMarkTime = 0;
 int gifTimeInterval = 500;
-int maxResults = 15;
-
+int maxGifResults = 15;
+String apiUrl = "https://api.giphy.com/v1/gifs/search?";
+String apiKey = "dc6zaTOxFJmzC";
+boolean gifSearchEnabled = false;
+  
 void armGif(String query) {
   gifQuery = query;
   armCreateGif = true;
@@ -16,7 +19,7 @@ void armGif(String query) {
 
 void createGif() {
   try {
-    gif = getSingleGif(gifQuery, maxResults);
+    gif = getSingleGif(gifQuery, maxGifResults);
     gif.loop();
     gif.play();
     gifMode = true;
@@ -25,11 +28,9 @@ void createGif() {
   }
 }
 
-ArrayList<String> getGifUrls(String query, int maxResults) {
+ArrayList<String> getGifUrls(String query, int maxGifResults) {
   ArrayList<String> returns = new ArrayList<String>();
-  String api = "https://api.giphy.com/v1/gifs/search?";
-  String apiKey = "dc6zaTOxFJmzC";
-  String queryUrl = api + "&api_key=" + apiKey + "&q=" + query;
+  String queryUrl = apiUrl + "&api_key=" + apiKey + "&q=" + query;
   JSONObject json = loadJSONObject(queryUrl);
   JSONArray data = json.getJSONArray("data");
   
@@ -42,29 +43,29 @@ ArrayList<String> getGifUrls(String query, int maxResults) {
       String url2 = "https://i.giphy.com/media/" + url.split("/media/")[1];
       returns.add(url2);
     } catch (Exception e) { }
-    if (returns.size() >= maxResults) break;
+    if (returns.size() >= maxGifResults) break;
   }
   
   return returns;
 }
 
-ArrayList<Gif> getGifArray(String query, int maxResults) {
+ArrayList<Gif> getGifArray(String query, int maxGifResults) {
   ArrayList<Gif> returns = new ArrayList<Gif>();
-  ArrayList<String> urls = getGifUrls(query, maxResults);
+  ArrayList<String> urls = getGifUrls(query, maxGifResults);
   
   for (int i=0; i<urls.size(); i++) {
     try {
       returns.add(new Gif(this, urls.get(i)));
     } catch (Exception e) { }
-    if (returns.size() >= maxResults) break;
+    if (returns.size() >= maxGifResults) break;
   }
   
   if (returns.size() < 1) gifMode = false;
   return returns;
 }
 
-Gif getSingleGif(String query, int maxResults) {
-  ArrayList<String> urls = getGifUrls(query, maxResults);
+Gif getSingleGif(String query, int maxGifResults) {
+  ArrayList<String> urls = getGifUrls(query, maxGifResults);
   Gif returns;
   try {
     returns = new Gif(this, urls.get((int) random(urls.size())));

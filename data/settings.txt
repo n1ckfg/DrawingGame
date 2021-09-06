@@ -1,0 +1,15 @@
+Global Scale
+3
+
+GIF Search Enabled
+false
+
+Max GIF Results
+10
+
+API Url
+https://api.giphy.com/v1/gifs/search?
+
+API Key
+dc6zaTOxFJmzC
+
