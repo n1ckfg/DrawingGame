@@ -22,14 +22,16 @@ boolean firstRun = true;
 boolean doOpticalFlow = false;
 PFont font;
 int fontSize = 48;
-  
+Settings settings;
+
 int globalScale = 3;
 int mouseXscaled, mouseYscaled, pmouseXscaled, pmouseYscaled;
 int sW, sH;
 Typer typer;
 
 void setup() {
-  fullScreen(P2D, 2);
+  fullScreen(P2D);
+  settings = new Settings("settings.txt");
   sW = displayWidth / globalScale;
   sH = displayHeight / globalScale;
   
@@ -163,7 +165,9 @@ void draw() {
   
   if (armBake) {
     pg.beginDraw();
-    pg.image(get(), 0, 0, pg.width, pg.height);
+    pg.imageMode(CORNER);
+    pg.image(get(0, 0, pg.width, pg.height), 0, 0, pg.width, pg.height);
+    pg.imageMode(CENTER);
     pg.endDraw();
     armBake = false;
     doOpticalFlow = false;
