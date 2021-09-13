@@ -25,6 +25,7 @@ int fontSize = 48;
 Settings settings;
 
 int globalScale = 3;
+int typerTimeout = 1500;
 int mouseXscaled, mouseYscaled, pmouseXscaled, pmouseYscaled;
 int sW, sH;
 Typer typer;
@@ -42,6 +43,7 @@ void setup() {
   ellipseMode(CENTER);
   
   typer = new Typer();
+  typer.timeout = typerTimeout;
   font = createFont("Arial", fontSize*2);
   textFont(font, fontSize);
   textAlign(CENTER);

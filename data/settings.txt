@@ -1,6 +1,9 @@
 Global Scale
 3
 
+Typing Timeout
+5000
+
 GIF Search Enabled
 false
 

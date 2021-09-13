@@ -7,6 +7,7 @@ class Settings {
       data = loadStrings(_s);
       for (int i=0;i<data.length;i++) {
         if (data[i].equals("Global Scale")) globalScale = setInt(data[i+1]); 
+        if (data[i].equals("Typing Timeout")) typerTimeout = setInt(data[i+1]); 
         if (data[i].equals("GIF Search Enabled")) gifSearchEnabled = setBoolean(data[i+1]); 
         if (data[i].equals("Max GIF Results")) maxGifResults = setInt(data[i+1]); 
         if (data[i].equals("API Url")) apiUrl = setString(data[i+1]); 
