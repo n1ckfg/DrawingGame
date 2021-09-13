@@ -20,6 +20,7 @@ boolean armLoad = false;
 boolean isRect = true;
 boolean firstRun = true;
 boolean doOpticalFlow = false;
+boolean doBloom = false;
 PFont font;
 int fontSize = 48;
 Settings settings;
@@ -173,6 +174,7 @@ void draw() {
     pg.endDraw();
     armBake = false;
     doOpticalFlow = false;
+    doBloom = false;
   }
 
   if (armInvert) {

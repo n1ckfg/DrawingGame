@@ -26,7 +26,7 @@ class Typer {
   
   void update() {
     int m = millis();
-    if (!armReset && m > markTime + timeout / 2 && m < markTime + timeout) {
+    if (!armReset && m > markTime + timeout - 500 && m < markTime + timeout) {
       currentCol = badCol; 
       armReset = true;
     } else if (m > markTime + timeout) {
@@ -135,8 +135,12 @@ class Typer {
       case "glitch":
         doOpticalFlow = true;
         break;
+      case "bloom":
+        doBloom = true;
+        break;
       case "clean":
         doOpticalFlow = false;
+        doBloom = false;
         break;
       // ~ ~ ~ ~ ~ ~   3. COLORS AND GIFS   ~ ~ ~ ~ ~ ~
       // https://www.colorhexa.com/color-names
@@ -152,7 +156,9 @@ class Typer {
         break;
     }
     
-    if (armReset) lastString = "" + inputString;
+    if (armReset) {
+      lastString = "" + inputString;
+    }
   }
   
   void setColor(color c) {

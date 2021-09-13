@@ -5,7 +5,7 @@ Typing Timeout
 5000
 
 GIF Search Enabled
-true
+false
 
 Max GIF Results
 3
