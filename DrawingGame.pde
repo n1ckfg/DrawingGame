@@ -31,8 +31,13 @@ int mouseXscaled, mouseYscaled, pmouseXscaled, pmouseYscaled;
 int sW, sH;
 Typer typer;
 
+int texSamplingMode = 3; // disables smoothing
+
 void setup() {
   fullScreen(P2D);
+  ((PGraphicsOpenGL)g).textureSampling(texSamplingMode); 
+  noSmooth();
+
   settings = new Settings("settings.txt");
   sW = displayWidth / globalScale;
   sH = displayHeight / globalScale;
@@ -66,6 +71,9 @@ void setup() {
   pg.endDraw();
   
   pgBackup.noSmooth();
+
+  ((PGraphicsOpenGL)pg).textureSampling(texSamplingMode);
+  ((PGraphicsOpenGL)pgBackup).textureSampling(texSamplingMode);
 }
 
 void draw() {  
