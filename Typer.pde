@@ -14,6 +14,7 @@ class Typer {
   boolean armReset = false;
   GifDictionary gifDictionary;
   ColorPicker colorPicker;
+  String finalText = "";
   
   Typer() {
     gifDictionary = new GifDictionary("dictionary.txt");
@@ -37,14 +38,18 @@ class Typer {
   }
   
   void draw() {
+    finalText = typer.inputString.toUpperCase();
+    
     fill(typer.outlineCol);
-    text(typer.inputString, width/2 + 2, height/2);
-    text(typer.inputString, width/2 - 2, height/2);
-    text(typer.inputString, width/2, height/2 + 2);
-    text(typer.inputString, width/2, height/2 - 2);
+    
+    text(finalText, width/2 + 2, height/2);
+    text(finalText, width/2 - 2, height/2);
+    text(finalText, width/2, height/2 + 2);
+    text(finalText, width/2, height/2 - 2);
   
     fill(typer.currentCol);
-    text(typer.inputString, width/2, height/2);
+    
+    text(finalText, width/2, height/2);
   }
   
   void run() {
@@ -102,7 +107,7 @@ class Typer {
         break;
       case "save":
         tex.save("output_" + millis() + "." + saveFormat);
-        pg.save("data/working.png");
+        pg.save(dataDirectory + "/working.png");
         break;
       case "square":
         isRect = true;

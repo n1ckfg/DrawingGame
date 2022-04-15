@@ -10,6 +10,9 @@ false
 Max GIF Results
 3
 
+Data Directory
+data
+
 API Url
 https://api.giphy.com/v1/gifs/search?
 

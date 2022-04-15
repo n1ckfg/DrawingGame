@@ -24,6 +24,7 @@ boolean doBloom = false;
 PFont font;
 int fontSize = 48;
 Settings settings;
+String dataDirectory = "";
 
 int globalScale = 3;
 int typerTimeout = 1500;
@@ -241,7 +242,7 @@ void resetBrush() {
 
 void loadWorkingImage() {
     try {
-      PImage workingImg = loadImage("data/working.png");
+      PImage workingImg = loadImage(dataDirectory + "/working.png");
       pg.image(workingImg, pg.width/2, pg.height/2, pg.width, pg.height);
     } catch (Exception e) { }
 }
