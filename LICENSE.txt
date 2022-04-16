@@ -1,5 +1,5 @@
 Bill and Joe's Drawing Game
-Copyright (c) 2021 Nick Fox-Gieg
+Copyright (c) 2022 Nick Fox-Gieg
 https://fox-gieg.com
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

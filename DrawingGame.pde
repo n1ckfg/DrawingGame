@@ -24,7 +24,7 @@ boolean doBloom = false;
 PFont font;
 int fontSize = 48;
 Settings settings;
-String dataDirectory = "";
+String dataDirectory = "data";
 
 int globalScale = 3;
 int typerTimeout = 1500;
